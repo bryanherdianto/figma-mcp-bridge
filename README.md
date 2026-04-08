@@ -50,8 +50,6 @@ Download the plugin from the [latest release](https://github.com/gethopp/figma-m
 
 Open a Figma file, run the plugin, and start prompting your AI tool. The MCP server will automatically connect to the plugin.
 
-If you want to know more about how it works, read the [How it works](#how-it-works) section.
-
 ## Local Development
 
 #### 1. Clone this repository locally
