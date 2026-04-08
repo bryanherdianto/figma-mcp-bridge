@@ -38,7 +38,7 @@ export default function App() {
 	const reconnectTimer = useRef<number | null>(null);
 
 	const statusLabel = useMemo(
-		() => (connected ? "WebSocket Connected" : "Disconnected"),
+		() => (connected ? "Connected" : "Disconnected"),
 		[connected],
 	);
 
@@ -122,18 +122,13 @@ export default function App() {
 
 	return (
 		<div className="container">
-			<div className="info-section">
-				<div className="info-row">
-					<span className="info-label">File:</span>
-					<span className="info-value">{status.fileName}</span>
-				</div>
-				<div className="info-row">
-					<span className="info-label">Selection:</span>
-					<span className="info-value">{status.selectionCount} node(s)</span>
-				</div>
+			<div className="info-row">
+				<span className="info-label">File:</span>
+				<span className="info-value">{status.fileName}</span>
 			</div>
-
-			<div className="footer">
+			<div className="info-row">
+				<span className="info-label">Selection:</span>
+				<span className="info-value">{status.selectionCount} node(s)</span>
 				<div className={`badge ${connected ? "connected" : "disconnected"}`}>
 					<span className="dot" />
 					<span className="badge-text">{statusLabel}</span>

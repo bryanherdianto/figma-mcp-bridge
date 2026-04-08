@@ -7,7 +7,7 @@
 - [Overview](#overview)
 - [Demo](#demo)
 - [Quick Start](#quick-start)
-- [Local development](#local-development)
+- [Local Development](#local-development)
 - [Structure](#structure)
 - [How It Works](#how-it-works)
 
@@ -52,7 +52,7 @@ Open a Figma file, run the plugin, and start prompting your AI tool. The MCP ser
 
 If you want to know more about how it works, read the [How it works](#how-it-works) section.
 
-## Local development
+## Local Development
 
 #### 1. Clone this repository locally
 
