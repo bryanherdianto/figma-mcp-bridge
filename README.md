@@ -1,24 +1,23 @@
 # Figma MCP Bridge
 
-[![Pairing with Hopp](https://gethopp.app/git/hopp-shield.svg?ref=hopp-repo)](https://gethopp.app)
+> Forked from https://github.com/gethopp/figma-mcp-bridge
 
+## Table of Contents
+
+- [Overview](#overview)
 - [Demo](#demo)
 - [Quick Start](#quick-start)
 - [Local development](#local-development)
 - [Structure](#structure)
-- [How it works](#how-it-works)
+- [How It Works](#how-it-works)
 
-<br/>
+## Overview
 
-<img src="https://raw.githubusercontent.com/gethopp/figma-mcp-bridge/main/logo.png" alt="Figma MCP Bridge" align="center" />
-
-<br/>
-
-While other amazing Figma MCP servers like [Figma-Context-MCP](https://github.com/GLips/Figma-Context-MCP/) exist, one issues is the [API limiting](https://github.com/GLips/Figma-Context-MCP/issues/258) for free users.
+While other amazing Figma MCP servers like [Figma-Context-MCP](https://github.com/GLips/Figma-Context-MCP/) exist, one issue is the [API limiting](https://github.com/GLips/Figma-Context-MCP/issues/258) for free users.
 
 The limit for free accounts is 6 requests per month, yes **per month**.
 
-Figma MCP Bridge is a solution to this problem. It is a plugin + MCP server that streams live Figma document data to AI tools without hitting Figma API rate limits, so its Figma MCP for the rest of us ✊
+Figma MCP Bridge is a solution to this problem. It is a plugin + MCP server that streams live Figma document data to AI tools without hitting Figma API rate limits, so it's Figma MCP for the rest of us ✊
 
 ## Demo
 
@@ -26,19 +25,18 @@ Figma MCP Bridge is a solution to this problem. It is a plugin + MCP server that
 
 [![Watch the video](https://img.youtube.com/vi/ouygIhFBx0g/maxresdefault.jpg)](https://youtu.be/ouygIhFBx0g)
 
-
 ## Quick Start
 
-### 1. Add the MCP server to your favourite AI tool
+### 1. Add the MCP server to your favorite AI tool
 
-Add the following to your AI tool's MCP configuration (e.g. Cursor, Windsurf, Claude Desktop):
+Add the following to your AI tool's MCP configuration (e.g. OpenCode):
 
 ```json
 {
-  "figma-bridge": {
-    "command": "npx",
-    "args": ["-y", "@gethopp/figma-mcp-bridge"]
-  }
+	"figma-bridge": {
+		"command": "npx",
+		"args": ["-y", "@gethopp/figma-mcp-bridge"]
+	}
 }
 ```
 
@@ -46,7 +44,7 @@ That's it — no binaries to download or install.
 
 ### 2. Add the Figma plugin
 
-Download the plugin from the [latest release](https://github.com/gethopp/figma-mcp-bridge/releases) page, then in Figma go to `Plugins > Development > Import plugin from manifest` and select the `manifest.json` file from the `plugin/` folder.
+Download the plugin from the [latest release](https://github.com/gethopp/figma-mcp-bridge/releases) page, then in Figma go to `Plugins > Development > Import plugin from manifest` and select the `manifest.json` file from the `plugin/` folder. Make sure to use **Figma Desktop**, as the web version doesn't support development plugins.
 
 ### 3. Start using it 🎉
 
@@ -74,16 +72,16 @@ cd server && npm install && npm run build
 cd plugin && bun install && bun run build
 ```
 
-#### 4. Add the MCP server to your favourite AI tool
+#### 4. Add the MCP server to your favorite AI tool
 
 For local development, add the following to your AI tool's MCP config:
 
 ```json
 {
-  "figma-bridge": {
-    "command": "node",
-    "args": ["/path/to/figma-mcp-bridge/server/dist/index.js"]
-  }
+	"figma-bridge": {
+		"command": "node",
+		"args": ["/path/to/figma-mcp-bridge/server/dist/index.js"]
+	}
 }
 ```
 
@@ -104,22 +102,22 @@ Figma-MCP-Bridge/
         └── types.ts      # Shared types
 ```
 
-## How it works
+## How It Works
 
 There are two main components to the Figma MCP Bridge:
 
 ### 1. The Figma Plugin
 
-The Figma plugin is the user interface for the Figma MCP Bridge. You run this inside the Figma file you want to use the MCP server for, and its responsible for getting you all the information you need.
+The Figma plugin is the user interface for the Figma MCP Bridge. You run this inside the Figma file you want to use the MCP server for, and it's responsible for getting you all the information you need.
 
 ### 2. The MCP Server
 
 The MCP server is the core of the Figma MCP Bridge. As the Figma plugin connects with the MCP server via a WebSocket connection, the MCP server is responsible for:
+
 - Handling WebSocket connections from the Figma plugin
 - Forwarding tool calls to the Figma plugin
 - Routing responses back to the Figma plugin
 - Handling leader election (as we can have only one WS connection to an MCP server at a time)
-
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐

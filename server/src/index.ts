@@ -10,36 +10,36 @@ import { VERSION } from "./version.js";
 const PORT = 1994;
 
 async function main(): Promise<void> {
-  const node = new Node(PORT);
-  const election = new Election(PORT, node);
-  await election.start();
+	const node = new Node(PORT);
+	const election = new Election(PORT, node);
+	await election.start();
 
-  // Graceful shutdown
-  const shutdown = () => {
-    console.error("Shutting down...");
-    election.stop();
-    node.stop();
-    process.exit(0);
-  };
+	// Graceful shutdown
+	const shutdown = () => {
+		console.error("Shutting down...");
+		election.stop();
+		node.stop();
+		process.exit(0);
+	};
 
-  process.on("SIGINT", shutdown);
-  process.on("SIGTERM", shutdown);
+	process.on("SIGINT", shutdown);
+	process.on("SIGTERM", shutdown);
 
-  // Create MCP server (stdio transport)
-  const server = new McpServer({
-    name: "figma-bridge",
-    version: VERSION,
-  });
+	// Create MCP server (stdio transport)
+	const server = new McpServer({
+		name: "figma-bridge",
+		version: VERSION,
+	});
 
-  registerTools(server, node);
+	registerTools(server, node);
 
-  console.error(`Starting MCP server (role: ${node.roleName})`);
+	console.error(`Starting MCP server (role: ${node.roleName})`);
 
-  const transport = new StdioServerTransport();
-  await server.connect(transport);
+	const transport = new StdioServerTransport();
+	await server.connect(transport);
 }
 
 main().catch((err) => {
-  console.error("Fatal error:", err);
-  process.exit(1);
+	console.error("Fatal error:", err);
+	process.exit(1);
 });
