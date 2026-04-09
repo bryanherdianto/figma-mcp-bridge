@@ -95,13 +95,16 @@ const serializeStyles = (node: SceneNode) => {
 	return styles;
 };
 
-export const serializeNode = (node: SceneNode): SerializedNode => {
+export const serializeNode = (node: SceneNode | PageNode): SerializedNode => {
 	const base: SerializedNode = {
 		id: node.id,
 		name: node.name,
 		type: node.type,
-		bounds: getBounds(node),
-		styles: serializeStyles(node),
+		bounds:
+			node.type === "PAGE"
+				? { x: 0, y: 0, width: 0, height: 0 }
+				: getBounds(node),
+		styles: node.type === "PAGE" ? {} : serializeStyles(node),
 	};
 
 	if (node.type === "TEXT") {

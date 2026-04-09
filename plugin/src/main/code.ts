@@ -145,7 +145,7 @@ const handleRequest = async (
 			case "get_design_context": {
 				const depth = request.params?.depth ?? 2;
 				const serializeWithDepth = async (
-					node: unknown,
+					node: SceneNode | PageNode,
 					currentDepth: number,
 				): Promise<ReturnType<typeof serializeNode>> => {
 					const serialized = serializeNode(node);
